@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="dist/css/bootstrap.css">
+	<script>
+		var item = ["Apple","Mango","Banana","orange"];
+		function one() // save
+		{
+			var newitem = document.getElementById("itemname").value;
+			item.push(newitem);
+			two(); // to get length
+			document.getElementById("itemname").value = ""; // set empty
+			document.getElementById("msg").innerHTML = "item added !";
+
+		}
+
+		function two() // display
+		{
+			var temp ="";
+			for(var i=0; i<item.length; i++) 
+			{
+				temp = temp + "<div class='col-md-3'> <p class='well'>"+item[i]+ " </p> <button class = 'btn btn-danger btn-sm'  onclick='delany("+i+")'>Delete</button></div>";
+
+			}
+
+			document.getElementById("itemlist").innerHTML = temp;
+
+		}
+
+		function delfirst()
+		{
+			item.shift(); // to delete 1st element
+			document.getElementById("msg").innerHTML ="Item Deleted";
+			two();
+		}
+
+		function dellast()
+		{
+			item.pop(); // to delete last element
+			document.getElementById("msg").innerHTML ="Item Deleted";
+			two();
+		}
+
+
+		function delany(index)
+		{
+			var status = confirm("Are you sure");
+			var itemname =item[index];
+			if(status==true)
+			{
+			item.splice(index, 1); // splice use to add (pass 0)/ delete (pass 1)
+			document.getElementById("msg").innerHTML ="Item Deleted";
+			two();
+		}
+	}
+
+
+
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-7"> <h3>Array one Example</h3></div>
+			<div class="col-md-5"><h3 id="msg"></h3></div>
+		</div> 
+
+		<div class="row">
+			<div class="col-md-3 well">
+				<label>New Element Name</label>
+				<input type="text" id="itemname" class="form-control input-sm">
+				<br>
+				<button class="btn btn-primary" onclick="one()">Save</button>
+				<button class="btn btn-success" onclick="two()">Display</button>
+				<hr>
+
+				<button class="btn btn-success" onclick="delfirst()"> delete first</button>
+				<button class="btn btn-warning" onclick="dellast()"> delete last</button>
+			</div> <!-3-->
+
+			<div class="col-md-9 text-center" id="itemlist">
+				<p>0 Item!</p>
+			</div> <!- 9->
+		</div> <!-row->
+
+
+	</div> <!- container end
+
+</body>
+</html>
